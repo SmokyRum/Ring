@@ -18,16 +18,16 @@ function decreaseGlobalRow() {
     globalRow = globalRow - 1;
 }
 
-// Create a new Date object
-var currentDate = new Date();
+// // Create a new Date object
+// var currentDate = new Date();
 
-// Get the current timestamp (milliseconds since January 1, 1970)
-var timestamp = currentDate.getTime();
+// // Get the current timestamp (milliseconds since January 1, 1970)
+// var timestamp = currentDate.getTime();
 
-// Convert the timestamp to a string
-var uniqueNumberAsString = "Uniques ID Number : " + timestamp.toString();
+// // Convert the timestamp to a string
+// var uniqueNumberAsString = "Uniques ID Number : " + timestamp.toString();
 
-document.getElementById('UniqueTimeOutput').innerHTML = uniqueNumberAsString;
+// document.getElementById('UniqueTimeOutput').innerHTML = uniqueNumberAsString;
 
 
 //
@@ -393,27 +393,27 @@ function deleteRow(rowIndex) {
 
 function submitform() {
 
-    var combined_data1 = {};
+    // var combined_data1 = {};
 
-    var formData = {
-        ShippingAccount: document.getElementById("ShipAccount").value,
-        Name: document.getElementById("name1").value,
-        CustomerPO: document.getElementById("customerPO").value,
-        DeliveryDate: document.getElementById("Date").value,
-        Email: document.getElementById("email1").value,
-        Phone: document.getElementById("phone1").value,
-        Address1: document.getElementById("Addr1").value,
-        Address2: document.getElementById("Addr2").value,
-        City: document.getElementById("city1").value,
-        State: document.getElementById("state1").value,
-        Zip_Code: document.getElementById("Zip").value
-    };
+    // var formData = {
+    //     ShippingAccount: document.getElementById("ShipAccount").value,
+    //     Name: document.getElementById("name1").value,
+    //     CustomerPO: document.getElementById("customerPO").value,
+    //     DeliveryDate: document.getElementById("Date").value,
+    //     Email: document.getElementById("email1").value,
+    //     Phone: document.getElementById("phone1").value,
+    //     Address1: document.getElementById("Addr1").value,
+    //     Address2: document.getElementById("Addr2").value,
+    //     City: document.getElementById("city1").value,
+    //     State: document.getElementById("state1").value,
+    //     Zip_Code: document.getElementById("Zip").value
+    // };
 
     // var jsonData = JSON.stringify(formData, null, 2);
 
-    combined_data1 = { ...combined_data1, ...formData };
+    // combined_data1 = { ...combined_data1, ...formData };
 
-    console.log(combined_data1);
+    // console.log(combined_data1);
 
     // console.log(formData);
 
@@ -616,5 +616,147 @@ function submitform() {
 //     }
 // }
 
+// function summary() {
+//     var cards = document.querySelectorAll('.dropdown-item');
+//     for (const card of cards) {
+//         var select = card.querySelector('input');
+//         if (select) {
+//             // console.log(select.value);
+//             var toinsert = select.value;
+//             const para = document.createElement('p');
+//             para.textContent = "Name" + " : " + toinsert;
 
-console.log(globalCurrentRow);
+//             // const target = document.getElementById('Insert_Here_3');
+//             // target.parentNode.insertBefore(para, target);
+
+//             if (select.id == 'item1' || select.id == 'item2' || select.id == 'item3') {
+//                 const target = document.getElementById('Insert_Here_1');
+//                 target.parentNode.insertBefore(para, target);
+//             }
+            
+//             if (select.id == 'item4' || select.id == 'item5' || select.id == 'item6') {
+//                 const target = document.getElementById('Insert_Here_2');
+//                 target.parentNode.insertBefore(para, target);
+//             }
+
+//             if (select.id == 'item7') {
+//                 const target = document.getElementById('Insert_Here_3');
+//                 target.parentNode.insertBefore(para, target);
+//             }
+//             break;
+//         }
+//     }
+// }
+
+function Fetch_Name() {
+    var item = document.getElementById('item1');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Name' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_1');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_Phone() {
+    var item = document.getElementById('item2');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Phone' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_1');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_ShipAcc() {
+    var item = document.getElementById('item3');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Ship Account' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_1');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_DeliveryName() {
+    var item = document.getElementById('item4');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Delivery Name' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_2');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_Addr1() {
+    var item = document.getElementById('item5');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Address 1' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_2');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_Addr2() {
+    var item = document.getElementById('item6');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Address 2' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_2');
+
+    target.parentNode.insertBefore(para, target);
+}
+
+function Fetch_CustomerPO() {
+    var item = document.getElementById('item7');
+
+    console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = 'Customer PO' + ' : ' + value;
+
+    const target = document.getElementById('Insert_Here_3');
+
+    target.parentNode.insertBefore(para, target);
+}
+
