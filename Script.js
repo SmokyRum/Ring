@@ -616,38 +616,6 @@ function submitform() {
 //     }
 // }
 
-// function summary() {
-//     var cards = document.querySelectorAll('.dropdown-item');
-//     for (const card of cards) {
-//         var select = card.querySelector('input');
-//         if (select) {
-//             // console.log(select.value);
-//             var toinsert = select.value;
-//             const para = document.createElement('p');
-//             para.textContent = "Name" + " : " + toinsert;
-
-//             // const target = document.getElementById('Insert_Here_3');
-//             // target.parentNode.insertBefore(para, target);
-
-//             if (select.id == 'item1' || select.id == 'item2' || select.id == 'item3') {
-//                 const target = document.getElementById('Insert_Here_1');
-//                 target.parentNode.insertBefore(para, target);
-//             }
-            
-//             if (select.id == 'item4' || select.id == 'item5' || select.id == 'item6') {
-//                 const target = document.getElementById('Insert_Here_2');
-//                 target.parentNode.insertBefore(para, target);
-//             }
-
-//             if (select.id == 'item7') {
-//                 const target = document.getElementById('Insert_Here_3');
-//                 target.parentNode.insertBefore(para, target);
-//             }
-//             break;
-//         }
-//     }
-// }
-
 function Fetch_Name() {
     var item = document.getElementById('item1');
 
@@ -661,7 +629,8 @@ function Fetch_Name() {
 
     const target = document.getElementById('Insert_Here_1');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_Phone() {
@@ -675,9 +644,10 @@ function Fetch_Phone() {
 
     para.textContent = 'Phone' + ' : ' + value;
 
-    const target = document.getElementById('Insert_Here_1');
+    const target = document.getElementById('Insert_Here_1_A');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_ShipAcc() {
@@ -691,9 +661,10 @@ function Fetch_ShipAcc() {
 
     para.textContent = 'Ship Account' + ' : ' + value;
 
-    const target = document.getElementById('Insert_Here_1');
+    const target = document.getElementById('Insert_Here_1_B');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_DeliveryName() {
@@ -709,7 +680,8 @@ function Fetch_DeliveryName() {
 
     const target = document.getElementById('Insert_Here_2');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_Addr1() {
@@ -723,9 +695,10 @@ function Fetch_Addr1() {
 
     para.textContent = 'Address 1' + ' : ' + value;
 
-    const target = document.getElementById('Insert_Here_2');
+    const target = document.getElementById('Insert_Here_2_A');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_Addr2() {
@@ -739,9 +712,10 @@ function Fetch_Addr2() {
 
     para.textContent = 'Address 2' + ' : ' + value;
 
-    const target = document.getElementById('Insert_Here_2');
+    const target = document.getElementById('Insert_Here_2_B');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
 
 function Fetch_CustomerPO() {
@@ -757,6 +731,6 @@ function Fetch_CustomerPO() {
 
     const target = document.getElementById('Insert_Here_3');
 
-    target.parentNode.insertBefore(para, target);
+    // target.parentNode.insertBefore(para, target);
+    target.textContent = para.textContent;
 }
-
