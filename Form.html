@@ -23,12 +23,10 @@
 </head>
 
 <body>
-
     <div class="container" style="min-width: 1700px; height:auto; margin:auto;">
-        <!-- <h1 style="text-align: center; display: inline-block; vertical-align: middle;">Send Ajaffe Order</h1>
-        <h1 id="UniqueTimeOutput"></h1> -->
+        <!-- <h1 style="text-align: center; display: inline-block; vertical-align: middle;">Send Ajaffe Order</h1> -->
         <h1 style="min-width: 1000px; text-align: right; display: inline-block;">Send Ajaffe Order</h1>
-        <h1 style="min-width: 550px; text-align: right; display: inline-block; font-weight: 600;" id="UniqueTimeOutput">
+        <h1 id="UniqueTimeOutput" style="min-width: 550px; text-align: right; display: inline-block; font-weight: 600;">
         </h1>
 
         <form>
@@ -180,7 +178,7 @@
                 <div class="col" style="max-width: auto;">
                     <table class="table" id="DataTable" style="max-width : auto;">
                         <thead>
-                            <tr>
+                            <tr id="Row">
                                 <th style="min-width: 100px;">Style</th>
                                 <th style="min-width: 100px;">Version</th>
                                 <th style="min-width: 100px;">Metal</th>
@@ -195,7 +193,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr id="Row0">
                                 <td>
                                     <input class="form-control" type="text" id="Style" name="Style">
                                 </td>
@@ -256,7 +254,7 @@
                                 </td>
                                 <td>
                                     <!-- <input class="form-control" type="text" id="grid" required> -->
-                                    <select class="form-control" id="CustomerCenter0" onchange="CellLogic()">
+                                    <select class="form-control" id="CustomerCenter0" onchange="handleInputThis(this)">
                                         <option value="" disabled selected>Select an Option</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -264,7 +262,7 @@
                                 </td>
                                 <td>
                                     <!-- <input class="form-control" type="text" id="grid" required> -->
-                                    <select class="form-control" id="Center0" onchange="CellLogic()">
+                                    <select class="form-control" id="Center0" onchange="handleInputThis(this)">
                                         <option value="" disabled selected>Select an Option</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -289,10 +287,12 @@
             </div>
 
             <div style="margin-top: -40px; margin-left: 60px;">
-                <button class="btn btn-success" type="button" onclick="addRow()" style="background-color: #687E86;">Add
+                <button class="btn btn-success" type="button" onclick="addRow()" style="background-color: #A47551 ;">Add
                     Row</button>
 
             </div>
+            
+            <!-- #687E86 -->
 
             <!-- <div class="input-data">
                     <div class="inner" onclick="submitform()"></div>

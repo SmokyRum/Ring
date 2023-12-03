@@ -69,7 +69,7 @@ body {
   max-width: 1000px;
   border-radius: 12%;
   opacity: 0.75;
-  background: #fff;
+  background: #FCFBF4;
   width: auto;
   height: auto;
   padding: 25px 40px 10px 40px;
@@ -285,7 +285,7 @@ th {
   /* this adds the "card" effect */
   padding: 16px;
   /* text-align: center; */
-  background-color: white; /* #F4EBD0 */
+  background-color: #FCFBF4; /* #F4EBD0 */
 }
 
 .card .scrollable-form {
@@ -360,4 +360,15 @@ p {
 .button-28:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+#Insert_Here_1,
+#Insert_Here_1_A,
+#Insert_Here_1_B,
+#Insert_Here_2,
+#Insert_Here_2_A,
+#Insert_Here_2_B,
+#Insert_Here_3 {
+  /* margin-bottom: -20px; */
+  line-height: 0.5;
 }

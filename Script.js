@@ -18,30 +18,31 @@ function decreaseGlobalRow() {
     globalRow = globalRow - 1;
 }
 
-// // Create a new Date object
-// var currentDate = new Date();
+// Create a new Date object
+var currentDate = new Date();
 
-// // Get the current timestamp (milliseconds since January 1, 1970)
-// var timestamp = currentDate.getTime();
+// Get the current timestamp (milliseconds since January 1, 1970)
+var timestamp = currentDate.getTime();
 
-// // Convert the timestamp to a string
-// var uniqueNumberAsString = "Uniques ID Number : " + timestamp.toString();
+// Convert the timestamp to a string
+var ustrr = "Uniques ID Number : " + timestamp.toString();
 
-// document.getElementById('UniqueTimeOutput').innerHTML = uniqueNumberAsString;
+console.log(ustrr);
 
+document.getElementById('epochTime').innerHTML = ustrr;
 
 //
 //
 //Select a particular cell within the table for <select> tag
-function selectSpecificSelect(row) {
-    var table = document.getElementById("DataTable");
+// function selectSpecificSelect(row) {
+//     var table = document.getElementById("DataTable");
 
-    var selectElement = table.rows[row].cells[7].querySelector(".select");
+//     var selectElement = table.rows[row].cells[7].querySelector(".select");
 
-    // selectElement.disabled = true;
-    // console.log(selectElement);
-    selectElement.add("disabled");
-}
+//     // selectElement.disabled = true;
+//     // console.log(selectElement);
+//     selectElement.add("disabled");
+// }
 
 // disableSpecificSelect(0, 2);
 //
@@ -229,6 +230,7 @@ function addRow() {
 
     var table = document.getElementById("DataTable").getElementsByTagName('tbody')[0];
     var newRow = table.insertRow(table.rows.length);
+    newRow.id = 'Row' + currRow.toString();
 
     for (var i = 0; i < 9; i++) {
         if (i == 4 || i == 6) {
@@ -320,6 +322,7 @@ function addRow() {
             else {
                 var idx = "Center" + currRow;
                 select.id = idx;
+                // select.onchange = CellLogic(globalRow);
             }
 
             var j = 0;
@@ -341,13 +344,22 @@ function addRow() {
                 select.appendChild(option);
             }
 
+            select.onchange = function() {
+                handleInputThis(this);
+            };
+
             // Append the select element to the cell
             cell.appendChild(select);
+
+            //Add an EventListner 
+            // const element = document.getElementById('idx');
+            // element.addEventListener('change', CellLogic());
+
             continue;
         }
         var cell = newRow.insertCell(i);
         var input = document.createElement("input");
-        input.type = "text";
+        input.type = "text" + currRow;
         input.className = "form-control";
         cell.appendChild(input);
 
@@ -364,7 +376,7 @@ function addRow() {
     var input = document.createElement("input");
     input.type = "text";
     input.className = "form-control";
-    input.id = "Note";
+    input.id = "Note" + currRow;
     cell.appendChild(input);
 
     var actionCell = newRow.insertCell(11);
@@ -372,9 +384,9 @@ function addRow() {
 
     updateGlobalRow();
 
-    globalCurrentRow = globalRow - 1;
+    // globalCurrentRow = globalRow - 1;
 
-    console.log(globalCurrentRow);
+    // console.log(globalCurrentRow);
 }
 
 function deleteRow(rowIndex) {
@@ -595,26 +607,66 @@ function submitform() {
 }
 
 //Logic for Cells :
-// function CellLogic() {
+function CellLogic(rowId) {
 
-//     const table = document.getElementById('DataTable');
+    const table = document.getElementById('DataTable');
 
-//     const rows = table.querySelectorAll('tr');
-//     // const cols = rows.querySelectorAll('td')[0];
-//     for (const row of rows) {
-//         const cols = row.querySelectorAll('td');
+    const rows = table.querySelectorAll(`tr#${rowId}`);
 
-//         for (j = 0; j < cols.length; j++) {
-//             const select = cols[j].querySelector('select');
+    var selectCC , selectCT;
+    // const cols = rows.querySelectorAll('td')[0];
+    // for(const row in rows) {
 
-//             if(j == 6 && select) {
-//                 console.log(select.value);
-//                 select.disabled = true;
-//                 break;
-//             }
-//         }
-//     }
-// }
+        const cols = rows[0].querySelectorAll('td');
+
+        for (j = 0; j < cols.length; j++) {
+            const select = cols[j].querySelectorAll('select');
+
+            if(j == 7 && select[0].value == 'Yes') {
+                // console.log(select[0].value);
+                // select[0].disabled = true;
+                selectCC = 1;
+            }
+
+            if(j == 8 && select[0].value == 'No') {
+                // console.log(select[0].value);
+                // select[0].disabled = true;
+                selectCT = 1;
+            }
+            // console.log(j);
+            // console.log(select);
+        }
+
+        console.log(selectCC + " " + selectCT);
+
+        for(j = 0; j < cols.length; j++) {
+            const select = cols[j].querySelectorAll('select , input');
+
+            if(j == 5 && selectCC == 1 && selectCT == 1) {
+                select[0].disabled = true;
+            }
+
+            if(j == 6 && selectCC == 1 && selectCT == 1) {
+                select[0].disabled = true;
+            }
+        }
+    // }
+
+    // console.log(rows[0]);
+
+    // const dataset = this.dataset.tag
+}
+
+function handleInputThis(inputElement) {
+    const current = inputElement.closest('tr');
+
+    const rowID = current.id;
+
+    // console.log(`tr id : ${rowID}`);
+    console.log('Row ID : ' + rowID);
+
+    CellLogic(rowID);
+}
 
 function Fetch_Name() {
     var item = document.getElementById('item1');
@@ -625,7 +677,8 @@ function Fetch_Name() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Name' + ' : ' + value;
+    // para.textContent = 'Name' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_1');
 
@@ -642,7 +695,8 @@ function Fetch_Phone() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Phone' + ' : ' + value;
+    // para.textContent = 'Phone' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_1_A');
 
@@ -659,7 +713,8 @@ function Fetch_ShipAcc() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Ship Account' + ' : ' + value;
+    // para.textContent = 'Ship Account' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_1_B');
 
@@ -676,7 +731,8 @@ function Fetch_DeliveryName() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Delivery Name' + ' : ' + value;
+    // para.textContent = 'Delivery Name' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_2');
 
@@ -693,7 +749,8 @@ function Fetch_Addr1() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Address 1' + ' : ' + value;
+    // para.textContent = 'Address 1' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_2_A');
 
@@ -710,7 +767,8 @@ function Fetch_Addr2() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Address 2' + ' : ' + value;
+    // para.textContent = 'Address 2' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_2_B');
 
@@ -727,7 +785,8 @@ function Fetch_CustomerPO() {
 
     const para = document.createElement('p');
 
-    para.textContent = 'Customer PO' + ' : ' + value;
+    // para.textContent = 'Customer PO' + ' : ' + value;
+    para.textContent = value;
 
     const target = document.getElementById('Insert_Here_3');
 
