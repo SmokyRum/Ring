@@ -4,49 +4,37 @@ const metal_types = ["10K White", "10K Yellow", "14K Rose", "14K White", "14K Ye
 
 const choice = ["Yes", "No"];
 
+let validRows = ['Row0'];
+
 let global64Data;
 
 let globalRow = 1;
 
 let globalCurrentRow = 1;
 
-function updateGlobalRow() {
-    globalRow = globalRow + 1;
+function removeFromValidRows(element) {
+    const elementidx = validRows.indexOf(element);
+
+    if (elementidx != -1) {
+        validRows.splice(elementidx, 1);
+    }
+    else {
+        console.log("Does not exist");
+    }
 }
 
-function decreaseGlobalRow() {
-    globalRow = globalRow - 1;
-}
+// // Create a new Date object
+// var currentDate = new Date();
 
-// Create a new Date object
-var currentDate = new Date();
+// // Get the current timestamp (milliseconds since January 1, 1970)
+// var timestamp = currentDate.getTime();
 
-// Get the current timestamp (milliseconds since January 1, 1970)
-var timestamp = currentDate.getTime();
+// // Convert the timestamp to a string
+// var ustrr = "Uniques ID Number : " + timestamp.toString();
 
-// Convert the timestamp to a string
-var ustrr = "Uniques ID Number : " + timestamp.toString();
+// console.log(ustrr);
 
-console.log(ustrr);
-
-document.getElementById('epochTime').innerHTML = ustrr;
-
-//
-//
-//Select a particular cell within the table for <select> tag
-// function selectSpecificSelect(row) {
-//     var table = document.getElementById("DataTable");
-
-//     var selectElement = table.rows[row].cells[7].querySelector(".select");
-
-//     // selectElement.disabled = true;
-//     // console.log(selectElement);
-//     selectElement.add("disabled");
-// }
-
-// disableSpecificSelect(0, 2);
-//
-//
+// document.getElementById('epochTime').innerHTML = ustrr;
 
 function getMetalValue(row) {
 
@@ -55,11 +43,6 @@ function getMetalValue(row) {
     var idx = "Metal" + place;
 
     var selectValue_temp = document.getElementById(idx).value;
-    // console.log(typeof selectValue);
-
-    // var selectValue = {
-    //     Matal : selectValue_temp,
-    // }
 
     return selectValue_temp;
 }
@@ -71,11 +54,6 @@ function getQualityValue(row) {
     var idx = "Quality" + place;
 
     var selectValue_temp = document.getElementById(idx).value;
-    // console.log(selectValue);
-
-    // var selectValue = {
-    //     Quality : selectValue_temp,
-    // }
 
     return selectValue_temp;
 }
@@ -87,11 +65,6 @@ function getCenterQualityValue(row) {
     var idx = "CenterQuality" + place;
 
     var selectValue_temp = document.getElementById(idx).value;
-    // console.log(selectValue);
-
-    // var selectValue = {
-    //     Center_Quality : selectValue_temp,
-    // }
 
     return selectValue_temp;
 }
@@ -103,11 +76,6 @@ function getCustomerCenterValue(row) {
     var idx = "CustomerCenter" + place;
 
     var selectValue_temp = document.getElementById(idx).value;
-    // console.log(selectValue);
-
-    // var selectValue = {
-    //     Customer_Center : selectValue_temp,
-    // }
 
     return selectValue_temp;
 }
@@ -119,11 +87,6 @@ function getCenterValue(row) {
     var idx = "Center" + place;
 
     var selectValue_temp = document.getElementById(idx).value;
-    // console.log(selectValue);
-
-    // var selectValue = {
-    //     Center : selectValue_temp,
-    // }
 
     return selectValue_temp;
 }
@@ -344,7 +307,7 @@ function addRow() {
                 select.appendChild(option);
             }
 
-            select.onchange = function() {
+            select.onchange = function () {
                 handleInputThis(this);
             };
 
@@ -380,27 +343,34 @@ function addRow() {
     cell.appendChild(input);
 
     var actionCell = newRow.insertCell(11);
-    actionCell.innerHTML = '<button class="btn btn-danger" style="background-color: #273B42; border-width:0px" onclick="deleteRow(' + (table.rows.length - 1) + ')">Delete <i class="bi bi-dash-circle-fill"></i></button> '
+    // actionCell.innerHTML = '<button class="btn btn-danger" style="background-color: #273B42; border-width:0px" onclick="deleteRow(' + (table.rows.length - 1) + ')">Delete <i class="bi bi-dash-circle-fill"></i></button> '
+    actionCell.innerHTML = '<button class="btn btn-danger button" type="button" style="background-color: #273B42; border-width:0px" onclick="deleteRow(this)">Delete <i class="bi bi-dash-circle-fill"></i></button> '
 
-    updateGlobalRow();
+    validRows.push(newRow.id);
+
+    globalRow = globalRow + 1;
 
     // globalCurrentRow = globalRow - 1;
 
     // console.log(globalCurrentRow);
 }
 
-function deleteRow(rowIndex) {
-    var table = document.querySelector(".table tbody");
-    var rowCount = table.rows.length;
+function deleteRow(button) {
+    var row = button.closest('tr');
 
-    // Ensure the specified row index is valid
-    // if (rowIndex >= 0 && rowIndex <= rowCount) {
-    //     table.deleteRow(rowIndex);
-    // } else {
-    //     alert("Invalid row index. Cannot delete.");
-    // }
-    table.deleteRow(rowIndex);
-    decreaseGlobalRow();
+    console.log(row.id);
+
+    if (row) {
+        //Remove the <tr> from validRow array
+        removeFromValidRows(row.id);
+
+        // Remove the <tr> element
+        row.parentNode.removeChild(row);
+    } else {
+        console.log("Error: <tr> element not found");
+    }
+
+    globalRow = globalRow - 1;
 }
 
 function submitform() {
@@ -436,170 +406,183 @@ function submitform() {
     var rows = tbody.getElementsByTagName("tr");
 
     for (var i = 0; i < globalRow; i++) {
-        var cells = rows[i].getElementsByTagName("td");
+        if (validRows.indexOf(rows[i].id) != -1) {
 
-        var combined_data = {};
+            console.log("YES");
 
-        for (var j = 0; j < cells.length; j++) {
-            if (j == 2) {
-                var selectValue = getMetalValue(i);
-                // console.log(selectValue);
+            console.log(rows[i]);
 
-                json_metal = {
-                    Row: i + 1,
-                    // Key: "Metal",
-                    Metal: selectValue,
-                }
+            console.log(i);
 
-                // console.log(json_metal);
+            var place = rows[i].id.charAt(rows[i].id.length - 1);
 
-                combined_data = { ...combined_data, ...json_metal };
-            }
-            else if (j == 4) {
-                var selectValue = getQualityValue(i);
-                // console.log(selectValue);
+            console.log(place);
 
-                json_quality = {
-                    Row: i + 1,
-                    // Key: "Quality",
-                    Quality: selectValue,
-                }
+            var cells = rows[i].getElementsByTagName("td");
 
-                // console.log(json_metal);
+            var combined_data = {};
 
-                combined_data = { ...combined_data, ...json_quality };
-            }
-            else if (j == 6) {
-                var selectValue = getCenterQualityValue(i);
-                // console.log(selectValue);
+            for (var j = 0; j < cells.length; j++) {
+                if (j == 2) {
+                    var selectValue = getMetalValue(place);
+                    // console.log(selectValue);
 
-                json_CenterQuality = {
-                    Row: i + 1,
-                    // Key: "CenterQuality",
-                    CenterQuality: selectValue,
-                }
-
-                // console.log(json_metal);
-
-                combined_data = { ...combined_data, ...json_CenterQuality };
-            }
-            else if (j == 7) {
-                var selectValue = getCustomerCenterValue(i);
-                // console.log(selectValue);
-
-                json_CustomerCenter = {
-                    Row: i + 1,
-                    // Key: "CustomerCenter",
-                    CustomerCenter: selectValue,
-                }
-
-                // console.log(json_metal);
-
-                combined_data = { ...combined_data, ...json_CustomerCenter };
-            }
-            else if (j == 8) {
-                var selectValue = getCenterValue(i);
-                // console.log(selectValue);
-
-                json_Center = {
-                    Row: i + 1,
-                    // Key: "Center",
-                    Center: selectValue,
-                }
-
-                // console.log(json_metal);
-
-                combined_data = { ...combined_data, ...json_Center };
-            }
-
-            else if (j == 9) {
-                // var selectValue = handleImage();
-                // console.log(selectValue);
-                // console.log(global64Data);
-
-                var str = useGlobalBase64Data();
-
-                json_image = {
-                    Row: i + 1,
-                    // Key: "Image",
-                    Image: str,
-                }
-
-                // console.log(json_image);
-
-                combined_data = { ...combined_data, ...json_image };
-            }
-
-            else {
-
-                var inputElement = cells[j].querySelector("input");
-
-                if (inputElement) {
-                    var inputValue = inputElement.value;
-                    // console.log("Row " + (i + 1) + ", Cell " + (j) + " input value: " + inputValue);
-                    // console.log(JSON.stringify(inputValue));
-                    // console.log(inputValue);
-
-                    if (j == 0) {
-                        json_data = {
-                            Row: i + 1,
-                            // Key: "Style",
-                            Style: inputValue,
-                        }
-
-                        // console.log(json_data);
-
-                        combined_data = { ...combined_data, ...json_data };
+                    json_metal = {
+                        Row: i + 1,
+                        // Key: "Metal",
+                        Metal: selectValue,
                     }
 
-                    if (j == 1) {
-                        json_data = {
-                            Row: i + 1,
-                            // Key: "Version",
-                            Version: inputValue,
-                        }
+                    // console.log(json_metal);
 
-                        // console.log(json_data);
-                        combined_data = { ...combined_data, ...json_data };
+                    combined_data = { ...combined_data, ...json_metal };
+                }
+                else if (j == 4) {
+                    var selectValue = getQualityValue(place);
+                    // console.log(selectValue);
+
+                    json_quality = {
+                        Row: i + 1,
+                        // Key: "Quality",
+                        Quality: selectValue,
                     }
 
-                    if (j == 3) {
-                        json_data = {
-                            Row: i + 1,
-                            // Key: "RingSize",
-                            RingSize: inputValue,
-                        }
+                    // console.log(json_metal);
 
-                        // console.log(json_data);
-                        combined_data = { ...combined_data, ...json_data };
+                    combined_data = { ...combined_data, ...json_quality };
+                }
+                else if (j == 6) {
+                    var selectValue = getCenterQualityValue(place);
+                    // console.log(selectValue);
+
+                    json_CenterQuality = {
+                        Row: i + 1,
+                        // Key: "CenterQuality",
+                        CenterQuality: selectValue,
                     }
 
-                    if (j == 5) {
-                        json_data = {
-                            Row: i + 1,
-                            // Key: "CenterSize",
-                            CenterSize: inputValue,
-                        }
+                    // console.log(json_metal);
 
-                        // console.log(json_data);
-                        combined_data = { ...combined_data, ...json_data };
+                    combined_data = { ...combined_data, ...json_CenterQuality };
+                }
+                else if (j == 7) {
+                    var selectValue = getCustomerCenterValue(place);
+                    // console.log(selectValue);
+
+                    json_CustomerCenter = {
+                        Row: i + 1,
+                        // Key: "CustomerCenter",
+                        CustomerCenter: selectValue,
                     }
 
-                    if (j == 10) {
-                        json_data = {
-                            Row: i + 1,
-                            // Key: "Note",
-                            Note: inputValue,
+                    // console.log(json_metal);
+
+                    combined_data = { ...combined_data, ...json_CustomerCenter };
+                }
+                else if (j == 8) {
+                    var selectValue = getCenterValue(place);
+                    // console.log(selectValue);
+
+                    json_Center = {
+                        Row: i + 1,
+                        // Key: "Center",
+                        Center: selectValue,
+                    }
+
+                    // console.log(json_metal);
+
+                    combined_data = { ...combined_data, ...json_Center };
+                }
+
+                else if (j == 9) {
+                    // var selectValue = handleImage();
+                    // console.log(selectValue);
+                    // console.log(global64Data);
+
+                    var str = useGlobalBase64Data();
+
+                    json_image = {
+                        Row: i + 1,
+                        // Key: "Image",
+                        Image: str,
+                    }
+
+                    // console.log(json_image);
+
+                    combined_data = { ...combined_data, ...json_image };
+                }
+
+                else {
+
+                    var inputElement = cells[j].querySelector("input");
+
+                    if (inputElement) {
+                        var inputValue = inputElement.value;
+                        // console.log("Row " + (i + 1) + ", Cell " + (j) + " input value: " + inputValue);
+                        // console.log(JSON.stringify(inputValue));
+                        // console.log(inputValue);
+
+                        if (j == 0) {
+                            json_data = {
+                                Row: i + 1,
+                                // Key: "Style",
+                                Style: inputValue,
+                            }
+
+                            // console.log(json_data);
+
+                            combined_data = { ...combined_data, ...json_data };
                         }
 
-                        // console.log(json_data);
-                        combined_data = { ...combined_data, ...json_data };
+                        if (j == 1) {
+                            json_data = {
+                                Row: i + 1,
+                                // Key: "Version",
+                                Version: inputValue,
+                            }
+
+                            // console.log(json_data);
+                            combined_data = { ...combined_data, ...json_data };
+                        }
+
+                        if (j == 3) {
+                            json_data = {
+                                Row: i + 1,
+                                // Key: "RingSize",
+                                RingSize: inputValue,
+                            }
+
+                            // console.log(json_data);
+                            combined_data = { ...combined_data, ...json_data };
+                        }
+
+                        if (j == 5) {
+                            json_data = {
+                                Row: i + 1,
+                                // Key: "CenterSize",
+                                CenterSize: inputValue,
+                            }
+
+                            // console.log(json_data);
+                            combined_data = { ...combined_data, ...json_data };
+                        }
+
+                        if (j == 10) {
+                            json_data = {
+                                Row: i + 1,
+                                // Key: "Note",
+                                Note: inputValue,
+                            }
+
+                            // console.log(json_data);
+                            combined_data = { ...combined_data, ...json_data };
+                        }
                     }
                 }
             }
+
+            console.log(combined_data);
         }
-
-        console.log(combined_data);
     }
 
     // This helps in unwanted iterations of a certain task or button or function.
@@ -613,43 +596,43 @@ function CellLogic(rowId) {
 
     const rows = table.querySelectorAll(`tr#${rowId}`);
 
-    var selectCC , selectCT;
+    var selectCC, selectCT;
     // const cols = rows.querySelectorAll('td')[0];
     // for(const row in rows) {
 
-        const cols = rows[0].querySelectorAll('td');
+    const cols = rows[0].querySelectorAll('td');
 
-        for (j = 0; j < cols.length; j++) {
-            const select = cols[j].querySelectorAll('select');
+    for (j = 0; j < cols.length; j++) {
+        const select = cols[j].querySelectorAll('select');
 
-            if(j == 7 && select[0].value == 'Yes') {
-                // console.log(select[0].value);
-                // select[0].disabled = true;
-                selectCC = 1;
-            }
-
-            if(j == 8 && select[0].value == 'No') {
-                // console.log(select[0].value);
-                // select[0].disabled = true;
-                selectCT = 1;
-            }
-            // console.log(j);
-            // console.log(select);
+        if (j == 7 && select[0].value == 'Yes') {
+            // console.log(select[0].value);
+            // select[0].disabled = true;
+            selectCC = 1;
         }
 
-        console.log(selectCC + " " + selectCT);
-
-        for(j = 0; j < cols.length; j++) {
-            const select = cols[j].querySelectorAll('select , input');
-
-            if(j == 5 && selectCC == 1 && selectCT == 1) {
-                select[0].disabled = true;
-            }
-
-            if(j == 6 && selectCC == 1 && selectCT == 1) {
-                select[0].disabled = true;
-            }
+        if (j == 8 && select[0].value == 'No') {
+            // console.log(select[0].value);
+            // select[0].disabled = true;
+            selectCT = 1;
         }
+        // console.log(j);
+        // console.log(select);
+    }
+
+    console.log(selectCC + " " + selectCT);
+
+    for (j = 0; j < cols.length; j++) {
+        const select = cols[j].querySelectorAll('select , input');
+
+        if (j == 5 && selectCC == 1 && selectCT == 1) {
+            select[0].disabled = true;
+        }
+
+        if (j == 6 && selectCC == 1 && selectCT == 1) {
+            select[0].disabled = true;
+        }
+    }
     // }
 
     // console.log(rows[0]);
@@ -793,3 +776,7 @@ function Fetch_CustomerPO() {
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
 }
+
+console.log(globalRow);
+
+console.log(validRows);
