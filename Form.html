@@ -26,7 +26,8 @@
     <div class="container" style="min-width: 1700px; height:auto; margin:auto;">
         <!-- <h1 style="text-align: center; display: inline-block; vertical-align: middle;">Send Ajaffe Order</h1> -->
         <h1 style="min-width: 1000px; text-align: right; display: inline-block;">Send Ajaffe Order</h1>
-        <h1 id="UniqueTimeOutput" style="min-width: 550px; text-align: right; display: inline-block; font-weight: 600;">
+        <h1 id="epochTime" style="min-width: 550px; text-align: right; display: inline-block; font-weight: 600; font-size: 18px;">
+            Hello
         </h1>
 
         <form>
@@ -38,9 +39,8 @@
                             <img src="Images/id-card.png" alt="Image description" width="60" height="60">
                         </div>
                         <div class="dropdown" style="width: fit-content; display: inline-block;">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown"
-                                style="text-align: center; width: 150px; background-color: #A47551; margin-left: 90px; margin-top:10px"
+                            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                style="text-align: center; width: 150px; background-color: #273B42; margin-left: 90px; margin-top:10px"
                                 aria-expanded="false">
                                 Customer Info
                             </a>
@@ -51,9 +51,11 @@
 
                             <p id="Insert_Here_1_B"></p>
 
-                            <ul class="dropdown-menu" style="opacity: 0.8;">
+                            <p id="Insert_Here_1_C"></p>
+
+                            <ul class="dropdown-menu" id="Conatact_Info" style="opacity: 0.8;">
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label style="display: inline-block;">Name : </label>
                                         <input class="form-control" id="item1"
                                             style="width: 210px; display: inline-block;" type="text"
@@ -61,7 +63,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label>Phone : </label>
                                         <input class="form-control" id="item2"
                                             style="width: 210px; display: inline-block;" type="text"
@@ -69,11 +71,19 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label>Ship Account : </label>
                                         <input class="form-control" id="item3"
                                             style="width: 150px; display: inline-block;" type="text"
                                             onchange="Fetch_ShipAcc()">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item">
+                                        <label>Email : </label>
+                                        <input class="form-control" id="item3_A"
+                                            style="width: 215px; display: inline-block;" type="text"
+                                            onchange="Fetch_Email()">
                                     </a>
                                 </li>
                             </ul>
@@ -87,9 +97,8 @@
                             <img src="Images/delivery-truck.png" alt="Image description" width="60" height="60">
                         </div>
                         <div class="dropdown" style="width: fit-content; display: inline-block;">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown"
-                                style="text-align: center; width: 150px; background-color: #A47551; margin-left: 90px; margin-top:10px"
+                            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                style="text-align: center; width: 150px; background-color: #273B42; margin-left: 90px; margin-top:10px"
                                 aria-expanded="false">
                                 Delivery Info
                             </a>
@@ -100,29 +109,37 @@
 
                             <p id="Insert_Here_2_B"></p>
 
-                            <ul class="dropdown-menu" style="opacity: 0.8;">
+                            <ul class="dropdown-menu" id="Delivery_Info" style="opacity: 0.8;">
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label style="display: inline-block;">Delivery Name : </label>
                                         <input class="form-control" id="item4"
-                                            style="width: 150px; display: inline-block;" type="text"
+                                            style="width: 145px; display: inline-block;" type="text"
                                             onchange="Fetch_DeliveryName()">
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label>Address 1 : </label>
                                         <input class="form-control" id="item5"
-                                            style="width: 190px; display: inline-block;" type="text"
+                                            style="width: 185px; display: inline-block;" type="text"
                                             onchange="Fetch_Addr1()">
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label>Address 2 : </label>
                                         <input class="form-control" id="item6"
-                                            style="width: 190px; display: inline-block;" type="text"
+                                            style="width: 180px; display: inline-block;" type="text"
                                             onchange="Fetch_Addr2()">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" id="item6_A">
+                                        <label for="date">Delivery : </label>
+                                        <input type="date" class="form-control"
+                                            style="width: 200px; display: inline-block;" id="date"
+                                            placeholder="Enter a date">
                                     </a>
                                 </li>
                             </ul>
@@ -136,22 +153,45 @@
                             <img src="Images/order-tracking.png" alt="Image description" width="60" height="60">
                         </div>
                         <div class="dropdown" style="width: fit-content; display: inline-block;">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown"
-                                style="text-align: center; width: 150px; background-color: #A47551; margin-left: 90px; margin-top:10px"
+                            <a class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                                style="text-align: center; width: 150px; background-color: #273B42; margin-left: 90px; margin-top:10px"
                                 aria-expanded="false">
                                 Order Info
                             </a>
                             <!-- <p>Hello : Hey!</p> -->
                             <p id="Insert_Here_3"></p>
 
-                            <ul class="dropdown-menu" style="opacity: 0.8;">
+                            <p id="Insert_Here_3_A"></p>
+
+                            <p id="Insert_Here_3_B"></p>
+
+                            <ul class="dropdown-menu" id="Order_Info" style="opacity: 0.8;">
                                 <li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item">
                                         <label style="display: inline-block;">Customer PO : </label>
                                         <input class="form-control" id="item7"
                                             style="width: 150px; display: inline-block;" type="text"
                                             onchange="Fetch_CustomerPO()">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-left" style="border: 0px;">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Confirm Order :
+                                        </label>
+                                        <input class="form-check-input" type="checkbox"
+                                            style="margin-left: 15px; height: 1.25em; width: 1.25em;"
+                                            id="flexCheckDefault" onchange="Fetch_ConfirmOrder()">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-left" style="border: 0px;">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Urgent Order :
+                                        </label>
+                                        <input class="form-check-input" type="checkbox"
+                                            style="margin-left: 25px; height: 1.25em; width: 1.25em;"
+                                            id="flexCheckDefault_1" onchange="Fetch_UrgentOrder()">
                                     </a>
                                 </li>
                             </ul>
@@ -287,11 +327,11 @@
             </div>
 
             <div style="margin-top: -40px; margin-left: 60px;">
-                <button class="btn btn-success" type="button" onclick="addRow()" style="background-color: #A47551 ;">Add
+                <button class="btn btn-success" type="button" onclick="addRow()" style="background-color: #273B42 ;">Add
                     Row</button>
 
             </div>
-            
+
             <!-- #687E86 -->
 
             <!-- <div class="input-data">

@@ -23,18 +23,12 @@ function removeFromValidRows(element) {
     }
 }
 
-// // Create a new Date object
-// var currentDate = new Date();
-
-// // Get the current timestamp (milliseconds since January 1, 1970)
-// var timestamp = currentDate.getTime();
-
-// // Convert the timestamp to a string
-// var ustrr = "Uniques ID Number : " + timestamp.toString();
-
-// console.log(ustrr);
-
-// document.getElementById('epochTime').innerHTML = ustrr;
+document.addEventListener('DOMContentLoaded', function () {
+    var currentDate = new Date();
+    var timestamp = currentDate.getTime();
+    var ustrr = "Unique ID : " + timestamp.toString();
+    document.getElementById('epochTime').innerHTML = ustrr;
+});
 
 function getMetalValue(row) {
 
@@ -113,11 +107,7 @@ function CellLogic() {
 
         if (j == 8 && select) {
             selectC = select.value;
-            // console.log(select);
         }
-
-        // console.log(select);
-
     }
 
     if (selectCC == "Yes" && selectC == "No") {
@@ -133,11 +123,7 @@ function CellLogic() {
             select_temp2.disabled = true;
         }
 
-    }
-
-    // console.log(selectCC + " " + selectC);
-
-    // console.log(selectCC + " " + selectC);
+    }   
 }
 
 function handleImage() {
@@ -375,25 +361,24 @@ function deleteRow(button) {
 
 function submitform() {
 
-    // var combined_data1 = {};
+    var combined_data1 = {};
 
-    // var formData = {
-    //     ShippingAccount: document.getElementById("ShipAccount").value,
-    //     Name: document.getElementById("name1").value,
-    //     CustomerPO: document.getElementById("customerPO").value,
-    //     DeliveryDate: document.getElementById("Date").value,
-    //     Email: document.getElementById("email1").value,
-    //     Phone: document.getElementById("phone1").value,
-    //     Address1: document.getElementById("Addr1").value,
-    //     Address2: document.getElementById("Addr2").value,
-    //     City: document.getElementById("city1").value,
-    //     State: document.getElementById("state1").value,
-    //     Zip_Code: document.getElementById("Zip").value
-    // };
+    var formData = {
+        ShippingAccount: Fetch_ShipAcc(),
+        Name : Fetch_Name(),
+        CustomerPO: Fetch_CustomerPO(),
+        // DeliveryDate: ,
+        Email: Fetch_Email(),
+        Phone: Fetch_Phone(),
+        Address1: Fetch_Addr1(),
+        Address2: Fetch_Addr2(),
+        // City: Fetch_City,
+        // State: document.getElementById("state1").value,
+        // Zip_Code: document.getElementById("Zip").value
+    };
 
-    // var jsonData = JSON.stringify(formData, null, 2);
 
-    // combined_data1 = { ...combined_data1, ...formData };
+    combined_data1 = { ...combined_data1, ...formData };
 
     // console.log(combined_data1);
 
@@ -408,15 +393,15 @@ function submitform() {
     for (var i = 0; i < globalRow; i++) {
         if (validRows.indexOf(rows[i].id) != -1) {
 
-            console.log("YES");
+            // console.log("YES");
 
-            console.log(rows[i]);
+            // console.log(rows[i]);
 
-            console.log(i);
+            // console.log(i);
 
             var place = rows[i].id.charAt(rows[i].id.length - 1);
 
-            console.log(place);
+            // console.log(place);
 
             var cells = rows[i].getElementsByTagName("td");
 
@@ -581,10 +566,11 @@ function submitform() {
                 }
             }
 
-            console.log(combined_data);
+            combined_data1 = {...combined_data1, ...combined_data};
         }
+        
+        console.log(combined_data1);
     }
-
     // This helps in unwanted iterations of a certain task or button or function.
     event.stopPropagation();
 }
@@ -654,7 +640,7 @@ function handleInputThis(inputElement) {
 function Fetch_Name() {
     var item = document.getElementById('item1');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -667,12 +653,14 @@ function Fetch_Name() {
 
     // target.parentNode.(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_Phone() {
     var item = document.getElementById('item2');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -685,12 +673,14 @@ function Fetch_Phone() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_ShipAcc() {
     var item = document.getElementById('item3');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -703,12 +693,14 @@ function Fetch_ShipAcc() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_DeliveryName() {
     var item = document.getElementById('item4');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -721,12 +713,14 @@ function Fetch_DeliveryName() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_Addr1() {
     var item = document.getElementById('item5');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -739,12 +733,14 @@ function Fetch_Addr1() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_Addr2() {
     var item = document.getElementById('item6');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -757,12 +753,14 @@ function Fetch_Addr2() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
 function Fetch_CustomerPO() {
     var item = document.getElementById('item7');
 
-    console.log(item);
+    // console.log(item);
 
     var value = item.value;
 
@@ -775,8 +773,80 @@ function Fetch_CustomerPO() {
 
     // target.parentNode.insertBefore(para, target);
     target.textContent = para.textContent;
+
+    return para.textContent;
 }
 
-console.log(globalRow);
+function Fetch_ConfirmOrder() {
+    var item = document.getElementById("flexCheckDefault");
 
-console.log(validRows);
+    // console.log(item);
+
+    var value;
+
+    if (item.checked) {
+        value = "Confirmed";
+    }
+
+    // else {
+    //     value = "No";
+    // }
+
+    const para = document.createElement('p');
+
+    para.textContent = value;
+
+    const target = document.getElementById("Insert_Here_3_A");
+
+    target.textContent = para.textContent;
+
+    return para.textContent;
+}
+
+function Fetch_UrgentOrder() {
+    var item = document.getElementById("flexCheckDefault_1");
+
+    // console.log(item);
+
+    var value;
+
+    if (item.checked) {
+        value = "Urgent";
+    }
+
+    // else {
+    //     value = "No";
+    // }
+
+    const para = document.createElement('p');
+
+    para.textContent = value;
+
+    const target = document.getElementById("Insert_Here_3_B");
+
+    target.textContent = para.textContent;
+
+    return para.textContent;
+}
+
+function Fetch_Email() {
+    var item = document.getElementById("item3_A");
+
+    // console.log(item);
+
+    var value = item.value;
+
+    const para = document.createElement('p');
+
+    para.textContent = value;
+
+    const target = document.getElementById("Insert_Here_1_C");
+
+    target.textContent = para.textContent;
+
+    return para.textContent;
+}
+
+// console.log(globalRow);
+
+// console.log(validRows);

@@ -65,11 +65,16 @@ body {
   /* background-image: linear-gradient(315deg, #adb2d3 0%, #ff6b6c 74%); */
 }
 
+td {
+  background: #FCFBF4;
+}
+
 .container {
   max-width: 1000px;
   border-radius: 12%;
   opacity: 0.75;
-  background: #FCFBF4;
+  /* background: #FCFBF4; */
+  background-color: #fff;
   width: auto;
   height: auto;
   padding: 25px 40px 10px 40px;
@@ -285,7 +290,7 @@ th {
   /* this adds the "card" effect */
   padding: 16px;
   /* text-align: center; */
-  background-color: #FCFBF4; /* #F4EBD0 */
+  background-color: #fff; /* #F4EBD0 */
 }
 
 .card .scrollable-form {
@@ -368,7 +373,10 @@ p {
 #Insert_Here_2,
 #Insert_Here_2_A,
 #Insert_Here_2_B,
-#Insert_Here_3 {
+#Insert_Here_3,
+#Insert_Here_3_A,
+#Insert_Here_3_B,
+#Insert_Here_1_C {
   /* margin-bottom: -20px; */
   line-height: 0.5;
 }
